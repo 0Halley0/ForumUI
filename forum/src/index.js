@@ -2,15 +2,25 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import App from "./App";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+//import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import ClassComponentExample from "./components/ClassComponentExample";
+import Router from "./Router";
+import { BrowserRouter } from "react-router-dom";
+//import FunctionComponentExample from "./components/FunctionComponentExample";
+//import ClassComponentExample from "./components/ClassComponentExample";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+
     {/*<ClassComponentExample />*/}
+    {/* <FunctionComponentExample /> */}
   </React.StrictMode>
 );
 
