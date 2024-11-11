@@ -6,13 +6,16 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import reportWebVitals from "./reportWebVitals";
 import Router from "./Router";
 import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "./ThemeContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
     <BrowserRouter>
-      <Router />
+      <ThemeProvider>
+        <Router />
+      </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

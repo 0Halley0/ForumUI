@@ -1,10 +1,11 @@
 import React from "react";
-import "../main.css"
+import "../main.css";
 
 export default function Main() {
+ 
   return (
-    <div>
-      <p>
+    <div className="w-full bg-primary dark:bg-dark-primary">
+      <p className=" text-white dark:text-dark-text">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum suscipit
         laborum aspernatur quae aliquam, eveniet quia nesciunt architecto earum
         ut dicta cupiditate placeat et nisi, qui sed necessitatibus aperiam

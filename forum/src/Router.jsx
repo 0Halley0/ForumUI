@@ -8,7 +8,7 @@ function Router() {
   return (
     <React.Fragment>
       <Header name="Head Section" />
-      <div className="container">
+      <div>
         <Routes>
           <Route path={"/"} element={<Main />} />
           <Route path={"*"} element={<Navigate to={"*"} />} />
