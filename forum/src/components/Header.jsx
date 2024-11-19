@@ -11,7 +11,7 @@ export default function Header() {
     };
 
   return (
-    <div className="bg-background dark:bg-dark-background border-b border-black flex justify-between align-middle gap-4 p-4">
+    <div className="bg-background dark:bg-dark-background border-b border-black flex justify-between align-middle gap-4 p-4 w-screen">
       <h1 className="text-5xl font-extralight text-logo dark:text-dark-logo">
         scroll
       </h1>
@@ -61,7 +61,6 @@ export default function Header() {
             menuOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-
           {/* Menu Links */}
           <ul className="flex flex-col  gap-4">
             <li className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">

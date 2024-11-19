@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className="bg-background dark:bg-dark-background border-t border-black ">
+    <div className="bg-background dark:bg-dark-background border-t border-black w-screen">
       {/* Desktop Navigation Buttons*/}
       <div className="hidden sm:flex justify-center align-middle gap-16 p-4">
         <button className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
