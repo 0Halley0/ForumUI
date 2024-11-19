@@ -6,16 +6,25 @@ module.exports = {
       colors: {
         // Light mode colors
         primary: "#3490dc",
-        secondary: "#ffed4a",
-        background: "#f8fafc",
+        secondary: "#534B52",
+        background: "#E0DDCF",
         text: "#333333",
-
+        buttonText: "#ffffff",
+        logo: "#000000",
+        darkPurple: "#2D232E",
+        gold: "#FFD700",
+        goldenRod: "#DAA520",
         // Dark mode colors
         dark: {
           primary: "#1e40af",
-          secondary: "#fbbf24",
-          background: "#111827",
-          text: "#e5e7eb",
+          secondary: "#534B52",
+          background: "#2D232E",
+          text: "#ffffff",
+          buttonText: "#000000",
+          logo: "#FFD700",
+          darkPurple: "#2D232E",
+          gold: "#FFD700",
+          goldenRod: "#DAA520",
         },
       },
     },
@@ -23,4 +32,3 @@ module.exports = {
   darkMode: "class",
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
 };
-
