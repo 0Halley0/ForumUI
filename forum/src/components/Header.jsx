@@ -1,18 +1,23 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../ThemeContext";
 import "../main.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const { toggleTheme } = useContext(ThemeContext);
-    const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
-    const toggleMenu = () => {
-      setMenuOpen((prev) => !prev);
-    };
+  const toggleMenu = () => {
+    setMenuOpen((prev) => !prev);
+  };
 
   return (
     <div className="bg-background dark:bg-dark-background border-b border-black flex justify-between align-middle gap-4 p-4 w-screen">
-      <h1 className="text-5xl font-extralight text-logo dark:text-dark-logo">
+      <h1
+        onClick={() => navigate("/")}
+        className="text-5xl cursor-pointer font-extralight text-logo dark:text-dark-logo"
+      >
         scroll
       </h1>
 
@@ -40,7 +45,10 @@ export default function Header() {
         >
           <i className="fa-solid fa-circle-half-stroke text-xl"></i>
         </button>
-        <button className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
+        <button
+          onClick={() => navigate("/about")}
+          className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+        >
           About
         </button>
         <button className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
@@ -63,7 +71,10 @@ export default function Header() {
         >
           {/* Menu Links */}
           <ul className="flex flex-col  gap-4">
-            <li className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
+            <li
+              onClick={() => navigate("/about")}
+              className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+            >
               About
             </li>
             <li className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
