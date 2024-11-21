@@ -51,7 +51,10 @@ export default function Header() {
         >
           About
         </button>
-        <button className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
+        <button
+          onClick={() => navigate("/membership")}
+          className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+        >
           Membership
         </button>
         <button className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
@@ -77,7 +80,10 @@ export default function Header() {
             >
               About
             </li>
-            <li className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
+            <li
+              onClick={() => navigate("/membership")}
+              className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+            >
               Membership
             </li>
             <li className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">

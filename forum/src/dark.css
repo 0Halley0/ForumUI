@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+p{
+    margin: 1.5rem;
+}
+
+h1{
+    font-size: 72px;
+    padding-left: 6rem;
+}
+h2{
+    font-size:32px;
+    padding-left: 7rem;
+}
+
 .dark-background {
   background-image: url('./assets/images/golden-cloud-left.png'), 
                     url('./assets/images/golden-cloud-group-right.png'), 
@@ -14,15 +27,15 @@
 @media (max-width: 425px) {
   .dark-background {
     background-image:
-                    url('./assets/images/circles-quarter.png'), 
-                    url('./assets/images/cloud-group-right.png');
-    background-size:  45%, 100%;
+                    url('./assets/images/golden-cloud-group-right.png'), 
+                    url('./assets/images/golden-cloud-left.png');
+    background-size:  45%, 80%;
     background-position: top right, bottom center;
   }
 }
 @media (min-width: 426px) and (max-width: 1024px) {
   .dark-background {
-    background-size: 60%, 25%, 30%, 60%;
+    background-size: 30%, 25%, 30%, 30%;
     background-position: top left, top right, bottom left, bottom right;
   }
 }

@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Main from "./components/Main";
 import About from "./components/About";
+import Membership from "./components/Membership";
 
 function Router() {
   return (
@@ -13,6 +14,7 @@ function Router() {
         <Routes>
           <Route path={"/"} element={<Main />} />
           <Route path={"/about"} element={<About />} />
+          <Route path={"/membership"} element={<Membership />} />
           <Route path={"*"} element={<Navigate to={"*"} />} />
         </Routes>
       </div>
