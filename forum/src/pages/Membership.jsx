@@ -1,5 +1,5 @@
 import React from 'react'
-import "../dark.css";
+import "../main.css";
 
 export default function Membership() {
   return (

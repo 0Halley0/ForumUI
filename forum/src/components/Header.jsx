@@ -13,13 +13,13 @@ export default function Header() {
   };
 
   return (
-    <div className="bg-background dark:bg-dark-background border-b border-black flex justify-between align-middle gap-4 p-4 w-screen">
-      <h1
+    <div className="bg-background dark:bg-dark-background border-b border-black flex justify-between align-middle p-4 w-screen">
+      <span
         onClick={() => navigate("/")}
-        className="text-5xl cursor-pointer font-extralight text-logo dark:text-dark-logo"
+        className="text-5xl ml-4 cursor-pointer font-extralight text-logo dark:text-dark-logo"
       >
         scroll
-      </h1>
+      </span>
 
       {/* Mobile Menu Buttons */}
       <div className="sm:hidden flex gap-4 align-middle">
@@ -57,6 +57,12 @@ export default function Header() {
         >
           Membership
         </button>
+        <button
+          onClick={() => navigate("/contact")}
+          className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+        >
+          Contact
+        </button>
         <button className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
           Sign in
         </button>
@@ -85,6 +91,12 @@ export default function Header() {
               className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
             >
               Membership
+            </li>
+            <li
+              onClick={() => navigate("/contact")}
+              className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+            >
+              Contact
             </li>
             <li className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
               Sign in

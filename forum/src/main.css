@@ -2,40 +2,191 @@
 @tailwind components;
 @tailwind utilities;
 
-p{
-    margin: 1.5rem;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 
-h1{
-    font-size: 72px;
-    padding-left: 6rem;
+p {
+  margin: 1.5rem;
 }
-h2{
-    font-size:32px;
-    padding-left: 7rem;
+
+h1 {
+  font-size: 72px;
+  padding-left: 6rem;
+}
+h2 {
+  font-size: 32px;
+  padding-left: 7rem;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;  
+    scrollbar-width: none; 
 }
 
 .light-background {
-  background-image: url('./assets/images/cloud-group-left.png'), 
-                    url('./assets/images/circles-quarter.png'), 
-                    url('./assets/images/circles.png'), 
-                    url('./assets/images/cloud-group-right.png');
+  background-image: url("./assets/images/cloud-group-left.png"),
+    url("./assets/images/circles-quarter.png"),
+    url("./assets/images/circles.png"),
+    url("./assets/images/cloud-group-right.png");
   background-size: auto, auto, auto, auto;
-  background-position: top left, top right, bottom left, bottom right;
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat; 
+  background-position: -100% top, 200% top, -100% bottom, 200% bottom;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  animation: slide-in 1.5s ease-out forwards;
+}
+
+@keyframes slide-in {
+  0% {
+    background-position: -100% top, 200% top, -100% bottom, 200% bottom;
+  }
+  100% {
+    background-position: top left, top right, bottom left, bottom right;
+  }
 }
 @media (max-width: 425px) {
   .light-background {
-    background-image:
-                    url('./assets/images/circles-quarter.png'), 
-                    url('./assets/images/cloud-group-right.png');
-    background-size:  45%, 100%;
+    background-image: url("./assets/images/circles-quarter.png"),
+      url("./assets/images/cloud-group-right.png");
+    background-size: 45%, 100%;
+    background-position: 150% top, 200% bottom;
+    animation: slide-in-mobile 1.5s ease-out forwards;
+  }
+}
+
+@keyframes slide-in-mobile {
+  0% {
+    background-position: 150% top, 200% bottom;
+  }
+  100% {
     background-position: top right, bottom center;
   }
 }
+
 @media (min-width: 426px) and (max-width: 1024px) {
   .light-background {
     background-size: 60%, 25%, 30%, 60%;
+    background-position: -100% top, 200% top, -100% bottom, 200% bottom;
+    animation: slide-in 1.5s ease-out forwards;
+  }
+}
+
+.dark-background {
+  background-image: url("./assets/images/golden-cloud-left.png"),
+    url("./assets/images/golden-cloud-group-right.png"),
+    url("./assets/images/golden-cloud-group-left.png"),
+    url("./assets/images/golden-cloud-right.png");
+  background-size: auto, auto, auto, auto;
+  background-position: -100% top, 200% top, -100% bottom, 200% bottom;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  animation: slide-in-dark 1.5s ease-out forwards;
+}
+
+@keyframes slide-in-dark {
+  0% {
+    background-position: -100% top, 200% top, -100% bottom, 200% bottom;
+  }
+  100% {
     background-position: top left, top right, bottom left, bottom right;
+  }
+}
+
+@media (max-width: 425px) {
+  .dark-background {
+    background-image: url("./assets/images/golden-cloud-group-right.png"),
+      url("./assets/images/golden-cloud-left.png");
+    background-size: 45%, 80%;
+    background-position: 150% top, -100% bottom;
+    animation: slide-in-dark-mobile 1.5s ease-out forwards;
+  }
+}
+
+@keyframes slide-in-dark-mobile {
+  0% {
+    background-position: 150% top, -100% bottom;
+  }
+  100% {
+    background-position: top right, bottom center;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 1024px) {
+  .dark-background {
+    background-size: 30%, 25%, 30%, 30%;
+    background-position: -100% top, 200% top, -100% bottom, 200% bottom;
+    animation: slide-in-dark 1.5s ease-out forwards;
+  }
+}
+
+.top-background {
+  background-image: url("./assets/images/cloud-group-left.png"),
+    url("./assets/images/circles-quarter.png");
+  background-size: 40%, 15%;
+  background-position: -100% top, 200% top;
+  background-repeat: no-repeat, no-repeat;
+  animation: slide-in-top 1.5s ease-out forwards;
+}
+
+@keyframes slide-in-top {
+  0% {
+    background-position: -100% top, 200% top;
+  }
+  100% {
+    background-position: top left, top right;
+  }
+}
+
+.bottom-background {
+  background-image: url("./assets/images/golden-cloud-group-left.png"),
+    url("./assets/images/golden-cloud-right.png");
+  background-size: 20%, 30%;
+  background-position: -100% bottom, 200% bottom;
+  background-repeat: no-repeat, no-repeat;
+  animation: slide-in-bottom 1.5s ease-out forwards;
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    background-position: -100% bottom, 200% bottom;
+  }
+  100% {
+    background-position: bottom left, bottom right;
+  }
+}
+
+@media (max-width: 425px) {
+  .top-background {
+    background-image: url("./assets/images/cloud-group-right.png");
+    background-size: 80%;
+    background-position: 150% top;
+  }
+  .bottom-background {
+    background-image: url("./assets/images/golden-cloud-right.png");
+    background-size: 70%;
+    background-position: bottom center;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 1024px) {
+  .top-background {
+    background-size: 40%, 20%;
+    background-position: -100% top, 200% top;
+  }
+  .bottom-background {
+    background-size: 25%, 30%;
+    background-position: -100% bottom, 200% bottom;
   }
 }
