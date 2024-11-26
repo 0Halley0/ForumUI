@@ -3,7 +3,7 @@ import { ThemeContext } from "../ThemeContext";
 import "../main.css";
 import { useNavigate } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ onSignIn }) {
   const { toggleTheme } = useContext(ThemeContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -11,7 +11,6 @@ export default function Header() {
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
   };
-
   return (
     <div className="bg-background dark:bg-dark-background border-b border-black flex justify-between align-middle p-4 w-screen">
       <span
@@ -63,7 +62,10 @@ export default function Header() {
         >
           Contact
         </button>
-        <button className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
+        <button
+          onClick={onSignIn}
+          className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+        >
           Sign in
         </button>
         <button className="bg-black dark:bg-goldenRod hover:bg-darkPurple dark:hover:bg-gold text-buttonText dark:text-black hover:text-gold dark:hover:text-darkPurple transition duration-200 p-2 rounded">
@@ -98,7 +100,10 @@ export default function Header() {
             >
               Contact
             </li>
-            <li className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
+            <li
+              onClick={onSignIn}
+              className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+            >
               Sign in
             </li>
             <li className="bg-black dark:bg-goldenRod hover:bg-darkPurple dark:hover:bg-gold text-buttonText dark:text-black hover:text-gold dark:hover:text-darkPurple transition duration-200 p-2 rounded">

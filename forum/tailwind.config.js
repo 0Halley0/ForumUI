@@ -14,6 +14,7 @@ module.exports = {
         darkPurple: "#2D232E",
         gold: "#FFD700",
         goldenRod: "#DAA520",
+        signinPopupBg: "#ffffff",
         // Dark mode colors
         dark: {
           primary: "#1e40af",
@@ -25,6 +26,7 @@ module.exports = {
           darkPurple: "#2D232E",
           gold: "#FFD700",
           goldenRod: "#DAA520",
+          signinPopupBg: "#2D232E",
         },
       },
     },
