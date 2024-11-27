@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Footer() {
-    const navigate = useNavigate();
+export default function Footer({ onSignIn }) {
+  const navigate = useNavigate();
   return (
     <div className="bg-background dark:bg-dark-background border-t border-black w-screen">
       {/* Desktop Navigation Buttons*/}
@@ -25,7 +25,10 @@ export default function Footer() {
         >
           Contact
         </button>
-        <button className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
+        <button
+          onClick={onSignIn}
+          className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+        >
           Sign in
         </button>
         <button
@@ -56,7 +59,10 @@ export default function Footer() {
         >
           Contact
         </button>
-        <button className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200">
+        <button
+          onClick={onSignIn}
+          className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+        >
           Sign in
         </button>
         <button

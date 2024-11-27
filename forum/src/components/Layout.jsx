@@ -18,7 +18,7 @@ const Layout = () => {
       <main className="flex-grow overflow-x-hidden scrollbar-hide">
         <Outlet />
       </main>
-      <Footer />
+      <Footer onSignIn={() => setShowSignin(true)} />
 
       {/* Overlay for Signin */}
       {showSignin && (
