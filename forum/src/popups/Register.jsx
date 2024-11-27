@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 
-export default function Signin({ onSwitchToRegister }) {
+export default function Register({ onSwitchToSignin }) {
   const [rememberMe, setRememberMe] = useState(false);
 
   const toggleRememberMe = () => setRememberMe((prev) => !prev);
   return (
     <div className="flex flex-col p-4 items-center justify-center h-fit bg-signinPopupBg dark:bg-dark-signinPopupBg rounded-lg">
       <p className="text-2xl text-text dark:text-dark-text font-semibold">
-        Sign in
+        Register
       </p>
       <button className="bg-zinc-100 dark:bg-zinc-700 hover:bg-darkPurple dark:hover:bg-gold text-text dark:text-dark-text hover:text-white dark:hover:text-darkPurple transition duration-200 py-2 w-full rounded-full">
-        Sign in with Google
+        Continue with Google
       </button>
 
       <form className="mt-8">
         <div>
           <label className="text-text dark:text-dark-text font-semibold">
-            Sign in with email
+            Continue with email
           </label>
           <input
             type="email"
@@ -39,12 +39,12 @@ export default function Signin({ onSwitchToRegister }) {
         Sign in
       </button>
       <p className="text-sm mt-4 dark:text-gray-300">
-        Don’t have an account?{" "}
+        Already have an account?{" "}
         <span
-          onClick={onSwitchToRegister}
+          onClick={onSwitchToSignin}
           className="text-goldenRod cursor-pointer hover:underline"
         >
-          Create one
+          Sign in
         </span>
       </p>
     </div>

@@ -3,7 +3,7 @@ import { ThemeContext } from "../ThemeContext";
 import "../main.css";
 import { useNavigate } from "react-router-dom";
 
-export default function Header({ onSignIn }) {
+export default function Header({ onSignIn, onRegister }) {
   const { toggleTheme } = useContext(ThemeContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -68,7 +68,10 @@ export default function Header({ onSignIn }) {
         >
           Sign in
         </button>
-        <button className="bg-black dark:bg-goldenRod hover:bg-darkPurple dark:hover:bg-gold text-buttonText dark:text-black hover:text-gold dark:hover:text-darkPurple transition duration-200 p-2 rounded">
+        <button
+          onClick={onRegister}
+          className="bg-black dark:bg-goldenRod hover:bg-darkPurple dark:hover:bg-gold text-buttonText dark:text-black hover:text-gold dark:hover:text-darkPurple transition duration-200 p-2 rounded"
+        >
           Register
         </button>
       </div>
@@ -106,7 +109,10 @@ export default function Header({ onSignIn }) {
             >
               Sign in
             </li>
-            <li className="bg-black dark:bg-goldenRod hover:bg-darkPurple dark:hover:bg-gold text-buttonText dark:text-black hover:text-gold dark:hover:text-darkPurple transition duration-200 p-2 rounded">
+            <li
+              onClick={onRegister}
+              className="bg-black dark:bg-goldenRod hover:bg-darkPurple dark:hover:bg-gold text-buttonText dark:text-black hover:text-gold dark:hover:text-darkPurple transition duration-200 p-2 rounded"
+            >
               Register
             </li>
           </ul>
