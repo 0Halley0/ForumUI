@@ -7,16 +7,20 @@ import reportWebVitals from "./reportWebVitals";
 import Router from "./Router";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./ThemeContext";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <BrowserRouter>
-      <ThemeProvider>
-        <Router />
-      </ThemeProvider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ThemeProvider>
+          <Router />
+        </ThemeProvider>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
