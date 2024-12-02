@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../store/authSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Register({ onSwitchToSignin }) {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
 
@@ -16,7 +19,7 @@ export default function Register({ onSwitchToSignin }) {
     try {
       await dispatch(signUp({ email })).unwrap();
       alert("Registration successful!");
-      onSwitchToSignin();
+      navigate("/verify-email");
     } catch (err) {
       alert(`Registration failed: ${err}`);
     }

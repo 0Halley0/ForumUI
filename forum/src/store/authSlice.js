@@ -30,6 +30,19 @@ export const signIn = createAsyncThunk(
   }
 );
 
+// Email Verification
+export const verifyEmail = createAsyncThunk(
+  "auth/verifyEmail",
+  async (token, { rejectWithValue }) => {
+    try {
+      const response = await apiService.verifyEmail(token);
+      return response.data; // Assuming backend sends a success message
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
 // Logout
 export const logout = createAsyncThunk(
   "auth/logout",
@@ -79,6 +92,19 @@ const authSlice = createSlice({
       .addCase(signIn.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(verifyEmail.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(verifyEmail.fulfilled, (state, action) => {
+        state.loading = false;
+        alert("Email verified successfully!");
+      })
+      .addCase(verifyEmail.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        alert("Email verification failed.");
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;

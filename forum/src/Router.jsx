@@ -8,6 +8,7 @@ import Membership from "./pages/Membership";
 import Contact from "./pages/Contact";
 import TermsAndPrivacy from "./pages/TermsAndPrivacy";
 import Layout from "./components/Layout";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
         <Route path="/membership" element={<Membership />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/terms-and-privacy" element={<TermsAndPrivacy />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
