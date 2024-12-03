@@ -29,6 +29,21 @@ h2 {
   padding-left: 7rem;
 }
 
+@media (max-width: 425px) {
+  p {
+  margin: 1rem;
+}
+
+h1 {
+  font-size: 58px;
+  padding-left: 3rem;
+}
+h2 {
+  font-size: 24px;
+  padding-left: 3.5rem;
+}
+}
+
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
