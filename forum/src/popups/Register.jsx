@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 
-export default function Register({ onSwitchToSignin }) {
+export default function Register({ onSwitchToSignin, onClose }) {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -19,7 +19,8 @@ export default function Register({ onSwitchToSignin }) {
     try {
       await dispatch(signUp({ email })).unwrap();
       alert("Registration successful!");
-      navigate("/verify-email");
+      onClose();
+      navigate("/verify-email", { state: { email } });
     } catch (err) {
       alert(`Registration failed: ${err}`);
     }

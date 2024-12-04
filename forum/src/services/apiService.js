@@ -16,7 +16,7 @@ const endpoints = {
   SIGN_IN: "/api/users/login/",
   REFRESH_TOKEN: "/auth/refresh",
   LOGOUT: "/auth/logout",
-  VERIFY_EMAIL: "/api/users/verify-email",
+  VERIFY_EMAIL: "/api/users/verify-email/",
 };
 
 const apiService = {
