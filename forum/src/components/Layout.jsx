@@ -28,6 +28,7 @@ const Layout = () => {
               setShowSignin(false);
               setShowRegister(true);
             }}
+            onClose={() => setShowSignin(false)}
           />
 
           <button
