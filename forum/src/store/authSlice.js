@@ -43,6 +43,19 @@ export const verifyEmail = createAsyncThunk(
   }
 );
 
+// Login Verification
+export const loginVerify = createAsyncThunk(
+  "auth/loginVerify",
+  async (token, { rejectWithValue }) => {
+    try {
+      const response = await apiService.loginVerify(token);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
 // Logout
 export const logout = createAsyncThunk(
   "auth/logout",
@@ -62,6 +75,8 @@ const authSlice = createSlice({
     user: null,
     loading: false,
     error: null,
+    accessToken: null,
+    refreshToken: null,
   },
   reducers: {
     clearError(state) {
@@ -87,6 +102,8 @@ const authSlice = createSlice({
       })
       .addCase(signIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
+        state.accessToken = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
         state.loading = false;
       })
       .addCase(signIn.rejected, (state, action) => {
@@ -105,6 +122,24 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
         alert("Email verification failed.");
+      })
+      .addCase(loginVerify.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginVerify.fulfilled, (state, action) => {
+        state.loading = false;
+        const { accessToken, refreshToken } = action.payload;
+        state.accessToken = accessToken;
+        state.refreshToken = refreshToken;
+        localStorage.setItem("accessToken", accessToken);
+        document.cookie = `refreshToken=${refreshToken}; path=/; HttpOnly`;  
+        alert("Login verified successfully!");
+      })
+      .addCase(loginVerify.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        alert("Login verification failed.");
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;

@@ -17,6 +17,7 @@ const endpoints = {
   REFRESH_TOKEN: "/auth/refresh",
   LOGOUT: "/auth/logout",
   VERIFY_EMAIL: "/api/users/verify-email/",
+  LOGIN_VERIFY: "/api/users/login-verify/",
 };
 
 const apiService = {
@@ -25,6 +26,7 @@ const apiService = {
   refreshToken: () => apiClient.post(endpoints.REFRESH_TOKEN),
   logout: () => apiClient.post(endpoints.LOGOUT),
   verifyEmail: (token) => apiClient.post(endpoints.VERIFY_EMAIL, { token }),
+  loginVerify: (token) => apiClient.post(endpoints.LOGIN_VERIFY, { token }),
 };
 
 export { apiService, endpoints };

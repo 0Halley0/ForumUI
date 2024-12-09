@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../main.css";
-import { verifyEmail } from "../store/authSlice";
+import { verifyEmail, loginVerify } from "../store/authSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,7 +8,7 @@ export default function Main() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const hasVerified = useRef(false);
+    const hasVerified = useRef(false);
   const { loading, error } = useSelector((state) => state.auth);
   const [statusMessage, setStatusMessage] = useState("");
 
@@ -18,7 +18,6 @@ export default function Main() {
 
     if (token && !hasVerified.current) {
       hasVerified.current = true;
-
       dispatch(verifyEmail(token))
         .unwrap()
         .then(() => {
