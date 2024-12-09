@@ -9,14 +9,13 @@ export default function Signin({ onSwitchToRegister, onClose }) {
   const { loading, error } = useSelector((state) => state.auth);
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   const toggleRememberMe = () => setRememberMe((prev) => !prev);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(signIn({ email, password })).unwrap();
+      await dispatch(signIn({ email })).unwrap();
       alert("Sign in successful!");
       onClose();
       navigate("/verify-email", { state: { email } });
