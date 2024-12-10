@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { verifyEmail, signUp } from "../store/authSlice";
+import { loginVerify, signIn } from "../store/authSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../main.css";
 
-export default function VerifyEmail() {
+export default function VerifyLogin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const hasVerified = useRef(false);
   const { loading, error } = useSelector((state) => state.auth);
   const [statusMessage, setStatusMessage] = useState("");
   const [email, setEmail] = useState(location.state?.email || "");
-
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const token = queryParams.get("token");
 
-    if (token) {
-      dispatch(verifyEmail(token))
+    if (token && !hasVerified.current) {
+      hasVerified.current = true;
+      dispatch(loginVerify(token))
         .unwrap()
         .then(() => {
           setStatusMessage("Email verified successfully!");
-          navigate("/");
         })
         .catch((err) => {
           setStatusMessage("Email verification failed.");
@@ -31,7 +31,7 @@ export default function VerifyEmail() {
   }, [dispatch, location, navigate]);
   const handleResendEmail = () => {
     if (email) {
-      dispatch(signUp({ email }))
+      dispatch(signIn({ email }))
         .unwrap()
         .then(() => {
           setStatusMessage("Verification email resent!");
@@ -54,8 +54,8 @@ export default function VerifyEmail() {
         </div>
         <div className="text-center py-4">
           <span className=" text-text dark:text-dark-text">
-            Please check your email at <b>{email}</b> and click the link to
-            complete setting up your account.
+            Please check your email at <b>{email}</b> and click the link to log
+            in to your account.
           </span>
         </div>
         <div className="flex flex-col items-center gap-4">

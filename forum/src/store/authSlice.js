@@ -49,6 +49,10 @@ export const loginVerify = createAsyncThunk(
   async (token, { rejectWithValue }) => {
     try {
       const response = await apiService.loginVerify(token);
+      const { access, refresh } = response.data;
+      localStorage.setItem("accessToken", access);
+      document.cookie = `refreshToken=${refresh}; path=/; HttpOnly; Secure; SameSite=Strict`;
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -130,10 +134,8 @@ const authSlice = createSlice({
       .addCase(loginVerify.fulfilled, (state, action) => {
         state.loading = false;
         const { accessToken, refreshToken } = action.payload;
-        state.accessToken = accessToken;
-        state.refreshToken = refreshToken;
-        localStorage.setItem("accessToken", accessToken);
-        document.cookie = `refreshToken=${refreshToken}; path=/; HttpOnly`;  
+       state.accessToken = action.payload.access;
+       state.refreshToken = action.payload.refresh;
         alert("Login verified successfully!");
       })
       .addCase(loginVerify.rejected, (state, action) => {

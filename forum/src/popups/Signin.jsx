@@ -18,7 +18,7 @@ export default function Signin({ onSwitchToRegister, onClose }) {
       await dispatch(signIn({ email })).unwrap();
       alert("Sign in successful!");
       onClose();
-      navigate("/verify-email", { state: { email } });
+      navigate("/verify-login", { state: { email } });
     } catch (err) {
       alert(`Sign in failed: ${err}`);
     }
