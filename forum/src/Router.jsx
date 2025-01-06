@@ -1,7 +1,5 @@
 import React from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
 import About from "./pages/About";
 import Membership from "./pages/Membership";
@@ -11,6 +9,7 @@ import Layout from "./components/Layout";
 import VerifyEmail from "./pages/VerifyEmail";
 import VerifyLogin from "./pages/VerifyLogin";
 import NotFound from "./pages/NotFound";
+import PublicForum from "./pages/PublicForum";
 
 function Router() {
   return (

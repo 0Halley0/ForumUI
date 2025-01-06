@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::before,
+*::after {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+*::-webkit-scrollbar {
+  display: none !important;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -27,6 +38,14 @@ h1 {
 h2 {
   font-size: 32px;
   padding-left: 7rem;
+}
+h3 {
+  font-size: 28px;
+  padding-left: 1rem;
+}
+h4 {
+  font-size: 24px;
+  padding-left: 1rem;
 }
 
 @media (max-width: 425px) {
@@ -203,5 +222,37 @@ h2 {
   .bottom-background {
     background-size: 25%, 30%;
     background-position: -100% bottom, 200% bottom;
+  }
+}
+
+.recommend-section-background {
+  background-image: url("./assets/images/golden-quarter.png"),
+    url("./assets/images/golden-cloud-left.png");
+  background-size: 45%, 40%;
+  background-position: -100% bottom, 200% top;
+  background-repeat: no-repeat, no-repeat;
+  animation: slide-in-bottom 1.5s ease-out forwards;
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    background-position: -100% bottom, 200% top;
+  }
+  100% {
+    background-position: bottom left, top right;
+  }
+}
+
+@media (max-width: 425px) {
+  .recommend-section-background {
+    background-size: 40%, 45%;
+    background-position: -100% bottom, 200% top;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 1024px) {
+  .recommend-section-background {
+    background-size: 60%, 60%;
+    background-position: -100% bottom, 200% top;
   }
 }
