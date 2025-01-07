@@ -64,8 +64,8 @@ export default function RecommendedSection() {
   };
 
   return (
-    <div className="h-screen text-dark-text recommend-section-background bg-dark-background p-4">
-      <div className="flex justify-between mt-16 gap-4">
+    <div className="h-screen text-dark-text recommend-section-background bg-dark-background border-l border-icon dark:border-dark-icon p-4">
+      <div className="flex justify-between mt-16 gap-2">
         <div className="relative lg:w-full xl:w-72">
           <input
             type="text"
@@ -78,13 +78,13 @@ export default function RecommendedSection() {
             <i className="fa-solid fa-magnifying-glass"></i>
           </div>
         </div>
-        <div className="flex gap-4 items-center">
-          <span>
+        <div className="flex gap-2 items-center">
+          <button className="hover:bg-gold text-buttonText hover:text-darkPurple transition duration-200 px-4 py-1 rounded">
             <i class="fa-regular fa-bookmark"></i> Library
-          </span>
-          <span>
+          </button>
+          <button className="hover:bg-gold text-buttonText hover:text-darkPurple transition duration-200 px-4 py-1 rounded">
             <i class="fa-regular fa-pen-to-square"></i> Write
-          </span>
+          </button>
         </div>
       </div>
 

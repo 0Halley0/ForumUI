@@ -22,6 +22,7 @@ function Router() {
         <Route path="/terms-and-privacy" element={<TermsAndPrivacy />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/verify-login" element={<VerifyLogin />} />
+        <Route path="/forum" element={<PublicForum />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
