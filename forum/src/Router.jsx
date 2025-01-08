@@ -10,6 +10,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import VerifyLogin from "./pages/VerifyLogin";
 import NotFound from "./pages/NotFound";
 import PublicForum from "./pages/PublicForum";
+import UserStories from "./pages/UserStories";
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function Router() {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/verify-login" element={<VerifyLogin />} />
         <Route path="/forum" element={<PublicForum />} />
+        <Route path="/stories" element={<UserStories />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

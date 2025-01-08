@@ -8,7 +8,7 @@ export default function StoryCard({
   image,
 }) {
   return (
-    <div className="bg-background dark:bg-dark-background grid grid-cols-1 lg:grid-cols-3 text-justify items-start p-4 border-b border-icon dark:border-dark-icon gap-4">
+    <div className="bg-background dark:bg-dark-background grid grid-cols-1 lg:grid-cols-3 text-justify items-start p-4 lg:mx-24 border-b border-icon dark:border-dark-icon gap-4">
       <div className="w-80 h-52 md:w-96 col-span-1 lg:hidden flex-shrink-0 mx-auto">
         <img
           src={image}
@@ -21,7 +21,7 @@ export default function StoryCard({
           <span className="line-clamp-2 text-xl text-text dark:text-dark-text font-semibold col-span-1">
             {title}
           </span>
-          <button className="hidden md:block">
+          <button className="hidden md:block text-text dark:text-dark-text">
             <i class="fa-solid fa-ellipsis"></i>
           </button>
         </div>
