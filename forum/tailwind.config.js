@@ -16,7 +16,7 @@ module.exports = {
         gold: "#FFD700",
         goldenRod: "#DAA520",
         signinPopupBg: "#ffffff",
-        icon: "#9ca3af",
+        icon: "#333333",
         // Dark mode colors
         dark: {
           primary: "#1e40af",

@@ -25,7 +25,8 @@ export default function PublicForum() {
   };
   const stories = [
     {
-      title: "Title of the story lorem ipsum",
+      title:
+        "Title of the story lorem ipsum dolore magna aliqua. Ut enim ad minim veniam",
       description:
         "Lorem Ipsum dolore magna aliqua. Ut enim ad minim veniam, dolore magna aliqua. Ut enim ad minim veniam, is simply dummy text of the printing and typesetting industry...",
       date: "Nov 15",
