@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Transition } from "react-transition-group";
 import RecommendedSection from "../components/RecommendedSection";
 import StoryCard from "../components/StoryCard";
+import ToggleButton from "../components/ToggleButton";
 
 const duration = 300;
 
@@ -19,11 +20,14 @@ const transitionStyles = {
 
 export default function UserStories() {
   const [showRecommended, setShowRecommended] = useState(false);
-  const [showDrafts, setShowDrafts] = useState(true);
+  const [selectedTab, setSelectedTab] = useState({
+    label: "Drafts",
+    value: "drafts",
+  });
   const toggleRecommended = () => {
     setShowRecommended(!showRecommended);
   };
-  const stories = [
+  const draftStories = [
     {
       title:
         "Title of the story lorem ipsum dolore magna aliqua. Ut enim ad minim veniam",
@@ -52,6 +56,9 @@ export default function UserStories() {
       image:
         "https://fastly.picsum.photos/id/36/4179/2790.jpg?hmac=OCuYYm0PkDCMwxWhrtoSefG5UDir4O0XCcR2x-aSPjs",
     },
+  ];
+
+  const publishedStories = [
     {
       title: "Another interesting story",
       description:
@@ -107,33 +114,37 @@ export default function UserStories() {
         "https://fastly.picsum.photos/id/36/4179/2790.jpg?hmac=OCuYYm0PkDCMwxWhrtoSefG5UDir4O0XCcR2x-aSPjs",
     },
     {
+      title:
+        "Title of the story lorem ipsum dolore magna aliqua. Ut enim ad minim veniam",
+      description:
+        "Lorem Ipsum dolore magna aliqua. Ut enim ad minim veniam, dolore magna aliqua. Ut enim ad minim veniam, is simply dummy text of the printing and typesetting industry...",
+      date: "Nov 15",
+      comments: 42,
+      image:
+        "https://fastly.picsum.photos/id/21/3008/2008.jpg?hmac=T8DSVNvP-QldCew7WD4jj_S3mWwxZPqdF0CNPksSko4",
+    },
+    {
       title: "Another interesting story",
       description:
-        "This is , qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, another example of a story description, showcasing the StoryCard component.",
+        "This is another example of a story description, dolore magna aliqua. Ut enim ad minim veniam, dolore magna aliqua. Ut enim ad minim veniam, showcasing the StoryCard component.",
       date: "Nov 16",
       comments: 15,
       image:
-        "https://fastly.picsum.photos/id/42/3456/2304.jpg?hmac=dhQvd1Qp19zg26MEwYMnfz34eLnGv8meGk_lFNAJR3g",
+        "https://fastly.picsum.photos/id/23/3887/4899.jpg?hmac=2fo1Y0AgEkeL2juaEBqKPbnEKm_5Mp0M2nuaVERE6eE",
     },
     {
       title: "Title of the story lorem ipsum",
       description:
-        "Lorem Ipsum is simply , qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, dummy text of the printing and typesetting industry...",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       date: "Nov 15",
       comments: 42,
       image:
-        "https://fastly.picsum.photos/id/64/4326/2884.jpg?hmac=9_SzX666YRpR_fOyYStXpfSiJ_edO3ghlSRnH2w09Kg",
-    },
-    {
-      title: "Another interesting story",
-      description:
-        "This is another , qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, example of a story description, showcasing the StoryCard component.",
-      date: "Nov 16",
-      comments: 15,
-      image:
-        "https://fastly.picsum.photos/id/75/1999/2998.jpg?hmac=0agRZd8c5CRiFvADOWJqfTv6lqYBty3Kw-9LEtLp_98",
+        "https://fastly.picsum.photos/id/36/4179/2790.jpg?hmac=OCuYYm0PkDCMwxWhrtoSefG5UDir4O0XCcR2x-aSPjs",
     },
   ];
+
+  const storiesToShow =
+    selectedTab.value === "drafts" ? draftStories : publishedStories;
 
   return (
     <div className="flex flex-col md:flex-row bg-background dark:bg-dark-background">
@@ -149,40 +160,30 @@ export default function UserStories() {
 
       <div className="flex-1">
         <div className="overflow-auto h-screen">
-          <div className="">
+          <div>
             <h1 className="font-thin text-text dark:text-dark-text">
               Your Stories
             </h1>
-            <div className="mt-4 mx-28 flex justify-start gap-8 text-xl">
-              <button
-                className="relative text-text dark:text-dark-text"
-                onClick={() => setShowDrafts(true)}
-              >
-                <span>Drafts</span>
-                <span
-                  className={`absolute bottom-0 left-0 h-[2px] w-full bg-text dark:bg-dark-text transform transition-transform ${
-                    showDrafts ? "scale-x-150" : "scale-x-0"
-                  }`}
-                  style={{ transformOrigin: "right" }}
-                ></span>
-              </button>
-              <button
-                className="relative text-text dark:text-dark-text"
-                onClick={() => setShowDrafts(false)}
-              >
-                <span>Published</span>
-                <span
-                  className={`absolute bottom-0 left-0 h-[2px] w-full bg-text dark:bg-dark-text transform transition-transform ${
-                    !showDrafts ? "scale-x-150" : "scale-x-0"
-                  }`}
-                  style={{ transformOrigin: "left" }}
-                ></span>
-              </button>
-            </div>
+            <ToggleButton
+              options={[
+                { label: "Drafts", value: "drafts" },
+                { label: "Published", value: "published" },
+              ]}
+              selectedOption={selectedTab}
+              onToggle={setSelectedTab}
+            />
           </div>
-          {stories.map((story, index) => (
-            <StoryCard key={index} {...story} />
-          ))}
+          <div className="mt-4">
+            {storiesToShow.length > 0 ? (
+              storiesToShow.map((story, index) => (
+                <StoryCard key={index} {...story} />
+              ))
+            ) : (
+              <p className="text-text dark:text-dark-text text-center mt-8">
+                No {selectedTab.label.toLowerCase()} stories available.
+              </p>
+            )}
+          </div>
         </div>
       </div>
 
