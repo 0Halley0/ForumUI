@@ -11,6 +11,8 @@ import VerifyLogin from "./pages/VerifyLogin";
 import NotFound from "./pages/NotFound";
 import PublicForum from "./pages/PublicForum";
 import UserStories from "./pages/UserStories";
+import Library from "./pages/Library";
+import Draft from "./pages/Draft";
 
 function Router() {
   return (
@@ -25,6 +27,8 @@ function Router() {
         <Route path="/verify-login" element={<VerifyLogin />} />
         <Route path="/forum" element={<PublicForum />} />
         <Route path="/stories" element={<UserStories />} />
+        <Route path="/library" element={<Library />} />
+        <Route path="/draft" element={<Draft />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

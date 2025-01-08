@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function RecommendedSection() {
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
-
+  const navigate = useNavigate();
   const recommendedStories = [
     {
       id: 1,
@@ -66,7 +67,7 @@ export default function RecommendedSection() {
   return (
     <div className="h-screen text-dark-text recommend-section-background bg-dark-background border-l border-icon dark:border-dark-icon p-4">
       <div className="flex justify-between mt-16 gap-2">
-        <div className="relative lg:w-full xl:w-72">
+        <div className="relative w-full">
           <input
             type="text"
             value={searchQuery}
@@ -78,14 +79,26 @@ export default function RecommendedSection() {
             <i className="fa-solid fa-magnifying-glass"></i>
           </div>
         </div>
-        <div className="flex gap-2 items-center">
-          <button className="hover:bg-gold text-buttonText hover:text-darkPurple transition duration-200 px-4 py-1 rounded">
-            <i class="fa-regular fa-bookmark"></i> Library
-          </button>
-          <button className="hover:bg-gold text-buttonText hover:text-darkPurple transition duration-200 px-4 py-1 rounded">
-            <i class="fa-regular fa-pen-to-square"></i> Write
-          </button>
-        </div>
+      </div>
+      <div className="flex gap-2 mt-2 items-center">
+        <button
+          onClick={() => navigate("/library")}
+          className="hover:bg-gold text-buttonText hover:text-darkPurple transition duration-200 px-4 py-1 rounded"
+        >
+          <i class="fa-regular fa-bookmark"></i> Library
+        </button>
+        <button
+          onClick={() => navigate("/draft")}
+          className="hover:bg-gold text-buttonText hover:text-darkPurple transition duration-200 px-4 py-1 rounded"
+        >
+          <i class="fa-regular fa-pen-to-square"></i> Write
+        </button>
+        <button
+          onClick={() => navigate("/stories")}
+          className="hover:bg-gold text-buttonText hover:text-darkPurple transition duration-200 px-4 py-1 rounded"
+        >
+          <i class="fa-solid fa-book-bookmark"></i> Stories
+        </button>
       </div>
 
       {debouncedQuery && (

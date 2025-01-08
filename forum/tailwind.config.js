@@ -17,6 +17,7 @@ module.exports = {
         goldenRod: "#DAA520",
         signinPopupBg: "#ffffff",
         icon: "#333333",
+        cardBackground: "#2D232E",
         // Dark mode colors
         dark: {
           primary: "#1e40af",
@@ -31,6 +32,7 @@ module.exports = {
           goldenRod: "#DAA520",
           signinPopupBg: "#2D232E",
           icon: "#FFD700",
+          cardBackground: "#212121",
         },
       },
     },
