@@ -36,7 +36,7 @@ export const verifyEmail = createAsyncThunk(
   async (token, { rejectWithValue }) => {
     try {
       const response = await apiService.verifyEmail(token);
-      return response.data; // Assuming backend sends a success message
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -133,10 +133,7 @@ const authSlice = createSlice({
       })
       .addCase(loginVerify.fulfilled, (state, action) => {
         state.loading = false;
-        const { accessToken, refreshToken } = action.payload;
-       state.accessToken = action.payload.access;
-       state.refreshToken = action.payload.refresh;
-        alert("Login verified successfully!");
+        alert("Login verified successfully!", state.accessToken);
       })
       .addCase(loginVerify.rejected, (state, action) => {
         state.loading = false;

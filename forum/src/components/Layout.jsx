@@ -5,16 +5,22 @@ import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 import Signin from "../popups/Signin";
 import Register from "../popups/Register";
+import ForumHeader from "./ForumHeader";
 
 const Layout = () => {
   const [showSignin, setShowSignin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const accessToken = localStorage.getItem("accessToken");
   return (
     <div className="flex flex-col min-h-screen">
-      <Header
-        onSignIn={() => setShowSignin(true)}
-        onRegister={() => setShowRegister(true)}
-      />
+      {accessToken ? (
+        <ForumHeader />
+      ) : (
+        <Header
+          onSignIn={() => setShowSignin(true)}
+          onRegister={() => setShowRegister(true)}
+        />
+      )}
       <main className="flex-grow overflow-x-hidden scrollbar-hide">
         <Outlet />
       </main>

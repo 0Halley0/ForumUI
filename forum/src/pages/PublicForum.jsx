@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { loginVerify } from "../store/authSlice";
 import { Transition } from "react-transition-group";
 import RecommendedSection from "../components/RecommendedSection";
 import StoryCard from "../components/StoryCard";
@@ -19,6 +22,26 @@ const transitionStyles = {
 
 export default function PublicForum() {
   const [showRecommended, setShowRecommended] = useState(false);
+  const [searchParams] = useSearchParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const tokenFromParams = searchParams.get("token");
+    const savedAccessToken = localStorage.getItem("accessToken");
+
+    if (!savedAccessToken && tokenFromParams) {
+      dispatch(loginVerify(tokenFromParams))
+        .unwrap()
+        .then(() => {
+          console.log("Login verified successfully");
+        })
+        .catch((err) => {
+          console.error("Login verification failed:", err);
+        });
+    } else if (savedAccessToken) {
+      console.log("User is already logged in.");
+    }
+  }, [dispatch, searchParams]);
 
   const toggleRecommended = () => {
     setShowRecommended(!showRecommended);
