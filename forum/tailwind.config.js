@@ -18,6 +18,7 @@ module.exports = {
         signinPopupBg: "#ffffff",
         icon: "#333333",
         cardBackground: "#2D232E",
+        draftPaperBackground: "#eeeee4",
         // Dark mode colors
         dark: {
           primary: "#1e40af",
@@ -33,6 +34,7 @@ module.exports = {
           signinPopupBg: "#2D232E",
           icon: "#FFD700",
           cardBackground: "#212121",
+          draftPaperBackground: "#2f2f2f",
         },
       },
     },
