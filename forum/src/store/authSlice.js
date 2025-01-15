@@ -50,11 +50,16 @@ export const loginVerify = createAsyncThunk(
     try {
       const response = await apiService.loginVerify(token);
       const { access, refresh } = response.data;
+
       localStorage.setItem("accessToken", access);
+      console.log("Access token saved to localStorage:", access);
+
       document.cookie = `refreshToken=${refresh}; path=/; HttpOnly; Secure; SameSite=Strict`;
+      console.log("Refresh token saved as cookie");
 
       return response.data;
     } catch (error) {
+      console.error("Login verification error:", error);
       return rejectWithValue(error.response?.data || error.message);
     }
   }
@@ -65,8 +70,11 @@ export const logout = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await apiService.logout();
+      //await apiService.logout();
       localStorage.removeItem("accessToken");
+      document.cookie =
+        "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+      alert("You have been logged out successfully.");
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -81,10 +89,14 @@ const authSlice = createSlice({
     error: null,
     accessToken: null,
     refreshToken: null,
+    isUserLoggedIn: !!localStorage.getItem("accessToken"),
   },
   reducers: {
     clearError(state) {
       state.error = null;
+    },
+    setLoginStatus(state, action) {
+      state.isUserLoggedIn = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -108,11 +120,13 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.accessToken = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;
+        state.isUserLoggedIn = true;
         state.loading = false;
       })
       .addCase(signIn.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.isUserLoggedIn = true;
       })
       .addCase(verifyEmail.pending, (state) => {
         state.loading = true;
@@ -142,9 +156,10 @@ const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
+        state.isUserLoggedIn = false;
       });
   },
 });
 
-export const { clearError } = authSlice.actions;
+export const { clearError, setLoginStatus } = authSlice.actions;
 export default authSlice.reducer;

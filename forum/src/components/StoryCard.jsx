@@ -22,7 +22,7 @@ export default function StoryCard({
             {title}
           </span>
           <button className="hidden md:block text-text dark:text-dark-text">
-            <i class="fa-solid fa-ellipsis"></i>
+            <i className="fa-solid fa-ellipsis"></i>
           </button>
         </div>
 
@@ -36,15 +36,15 @@ export default function StoryCard({
             <span className="mx-2">•</span>
             <span>
               {comments}{" "}
-              <i class="text-icon dark:text-dark-icon fa-solid fa-message"></i>
+              <i className="text-icon dark:text-dark-icon fa-solid fa-message"></i>
             </span>
           </div>
           <div className="flex gap-4 text-text dark:text-dark-text">
             <button>
-              <i class="fa-regular fa-bookmark"></i>
+              <i className="fa-regular fa-bookmark"></i>
             </button>
             <button className="md:hidden">
-              <i class="fa-solid fa-ellipsis-vertical"></i>
+              <i className="fa-solid fa-ellipsis-vertical"></i>
             </button>
           </div>
         </div>

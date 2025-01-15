@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function Footer({ onSignIn }) {
   const navigate = useNavigate();
   return (
-    <div className="bg-background dark:bg-dark-background border-t border-black w-screen">
+    <div className="bg-background dark:bg-dark-background border-t border-icon dark:border-dark-icon w-screen">
       {/* Desktop Navigation Buttons*/}
       <div className="hidden sm:flex justify-center align-middle gap-16 p-4">
         <button

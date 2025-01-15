@@ -85,19 +85,19 @@ export default function RecommendedSection() {
           onClick={() => navigate("/library")}
           className="hover:bg-gold text-buttonText hover:text-darkPurple transition duration-200 px-4 py-1 rounded"
         >
-          <i class="fa-regular fa-bookmark"></i> Library
+          <i className="fa-regular fa-bookmark"></i> Library
         </button>
         <button
           onClick={() => navigate("/draft")}
           className="hover:bg-gold text-buttonText hover:text-darkPurple transition duration-200 px-4 py-1 rounded"
         >
-          <i class="fa-regular fa-pen-to-square"></i> Write
+          <i className="fa-regular fa-pen-to-square"></i> Write
         </button>
         <button
           onClick={() => navigate("/stories")}
           className="hover:bg-gold text-buttonText hover:text-darkPurple transition duration-200 px-4 py-1 rounded"
         >
-          <i class="fa-solid fa-book-bookmark"></i> Stories
+          <i className="fa-solid fa-book-bookmark"></i> Stories
         </button>
       </div>
 

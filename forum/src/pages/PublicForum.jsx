@@ -27,9 +27,13 @@ export default function PublicForum() {
 
   useEffect(() => {
     const tokenFromParams = searchParams.get("token");
-    const savedAccessToken = localStorage.getItem("accessToken");
 
-    if (!savedAccessToken && tokenFromParams) {
+    if (tokenFromParams) {
+      console.log("Token found in URL:", tokenFromParams);
+
+      localStorage.setItem("accessToken", tokenFromParams);
+      console.log("Token saved to localStorage:", tokenFromParams);
+
       dispatch(loginVerify(tokenFromParams))
         .unwrap()
         .then(() => {
@@ -38,8 +42,8 @@ export default function PublicForum() {
         .catch((err) => {
           console.error("Login verification failed:", err);
         });
-    } else if (savedAccessToken) {
-      console.log("User is already logged in.");
+    } else {
+      console.log("No token found in URL");
     }
   }, [dispatch, searchParams]);
 

@@ -52,7 +52,7 @@ export default function Draft() {
     placeholder: "Start writing your content...",
   });
   return (
-    <div className="bg-background dark:bg-dark-background">
+    <div className="bg-background dark:bg-dark-background pb-16">
       <h1 className="font-thin text-text dark:text-dark-text">Draft</h1>
       <div
         id="editorjs"

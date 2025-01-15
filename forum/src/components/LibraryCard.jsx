@@ -9,7 +9,7 @@ export default function LibraryCard({
 }) {
   return (
     <div className="col-span-1 mx-auto lg:mx-4 mt-6">
-      <div class="max-w-sm h-full  rounded-lg overflow-hidden shadow-lg bg-cardBackground dark:bg-dark-cardBackground">
+      <div className="max-w-sm h-full  rounded-lg overflow-hidden shadow-lg bg-cardBackground dark:bg-dark-cardBackground">
         <div className="h-56 flex-shrink-0 mx-auto">
           <img
             src={image}
@@ -17,11 +17,11 @@ export default function LibraryCard({
             className="w-full h-full object-cover rounded"
           />
         </div>
-        <div class="my-6 px-4">
-          <span class="font-semibold text-xl mb-2 text-dark-text line-clamp-2">
+        <div className="my-6 px-4">
+          <span className="font-semibold text-xl mb-2 text-dark-text line-clamp-2">
             {title}
           </span>
-          <span class="line-clamp-4 font-light text-dark-text text-justify">
+          <span className="line-clamp-4 font-light text-dark-text text-justify">
             {description}
           </span>
         </div>
@@ -30,7 +30,7 @@ export default function LibraryCard({
           <span className="text-dark-text">{date}</span>
           <span className="mx-2 text-dark-text">•</span>
           <span className="text-dark-text">
-            {comments} <i class="text-dark-icon fa-solid fa-message"></i>
+            {comments} <i className="text-dark-icon fa-solid fa-message"></i>
           </span>
         </div>
       </div>

@@ -1,19 +1,27 @@
 // src/components/Layout.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 import Signin from "../popups/Signin";
 import Register from "../popups/Register";
 import ForumHeader from "./ForumHeader";
+import { setLoginStatus } from "../store/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Layout = () => {
+  const dispatch = useDispatch();
   const [showSignin, setShowSignin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-  const accessToken = localStorage.getItem("accessToken");
+  const isAuthenticated = useSelector((state) => state.auth.isUserLoggedIn);
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    dispatch(setLoginStatus(!!accessToken));
+  }, [dispatch]);
+
   return (
     <div className="flex flex-col min-h-screen">
-      {accessToken ? (
+      {isAuthenticated ? (
         <ForumHeader />
       ) : (
         <Header

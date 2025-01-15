@@ -12,7 +12,7 @@ export default function Header({ onSignIn, onRegister }) {
     setMenuOpen((prev) => !prev);
   };
   return (
-    <div className="bg-background dark:bg-dark-background border-b border-black flex justify-between align-middle p-4 w-screen">
+    <div className="bg-background dark:bg-dark-background border-b border-icon dark:border-dark-icon flex justify-between align-middle p-4 w-screen">
       <span
         onClick={() => navigate("/")}
         className="text-5xl ml-4 cursor-pointer font-extralight text-logo dark:text-dark-logo"
