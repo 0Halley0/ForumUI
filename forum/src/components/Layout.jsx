@@ -6,18 +6,13 @@ import { Outlet } from "react-router-dom";
 import Signin from "../popups/Signin";
 import Register from "../popups/Register";
 import ForumHeader from "./ForumHeader";
-import { setLoginStatus } from "../store/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Layout = () => {
-  const dispatch = useDispatch();
   const [showSignin, setShowSignin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-  const isAuthenticated = useSelector((state) => state.auth.isUserLoggedIn);
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    dispatch(setLoginStatus(!!accessToken));
-  }, [dispatch]);
+  const token = useSelector((state) => state.auth.token);
+  const isAuthenticated = Boolean(token);
 
   return (
     <div className="flex flex-col min-h-screen">

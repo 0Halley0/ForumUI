@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSearchParams } from "react-router-dom";
-import { loginVerify } from "../store/authSlice";
 import { Transition } from "react-transition-group";
 import RecommendedSection from "../components/RecommendedSection";
 import StoryCard from "../components/StoryCard";
@@ -22,30 +19,6 @@ const transitionStyles = {
 
 export default function PublicForum() {
   const [showRecommended, setShowRecommended] = useState(false);
-  const [searchParams] = useSearchParams();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const tokenFromParams = searchParams.get("token");
-
-    if (tokenFromParams) {
-      console.log("Token found in URL:", tokenFromParams);
-
-      localStorage.setItem("accessToken", tokenFromParams);
-      console.log("Token saved to localStorage:", tokenFromParams);
-
-      dispatch(loginVerify(tokenFromParams))
-        .unwrap()
-        .then(() => {
-          console.log("Login verified successfully");
-        })
-        .catch((err) => {
-          console.error("Login verification failed:", err);
-        });
-    } else {
-      console.log("No token found in URL");
-    }
-  }, [dispatch, searchParams]);
 
   const toggleRecommended = () => {
     setShowRecommended(!showRecommended);
@@ -161,6 +134,15 @@ export default function PublicForum() {
         "https://fastly.picsum.photos/id/75/1999/2998.jpg?hmac=0agRZd8c5CRiFvADOWJqfTv6lqYBty3Kw-9LEtLp_98",
     },
   ];
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenFromUrl = urlParams.get("token");
+
+    if (tokenFromUrl) {
+      sessionStorage.setItem("token", tokenFromUrl);
+    }
+  }, []);
 
   return (
     <div className="flex flex-col md:flex-row bg-background dark:bg-dark-background">

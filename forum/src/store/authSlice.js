@@ -1,12 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiService } from "../services/apiService";
 
-// Sign Up
+const initialState = {
+  user: null,
+  token: sessionStorage.getItem("token") || null,
+  loading: false,
+  error: null,
+};
+
 export const signUp = createAsyncThunk(
   "auth/signUp",
-  async (userData, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const response = await apiService.signUp(userData);
+      const response = await apiService.signUp(data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -14,15 +20,13 @@ export const signUp = createAsyncThunk(
   }
 );
 
-// Sign In
 export const signIn = createAsyncThunk(
   "auth/signIn",
-  async (userData, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const response = await apiService.signIn(userData);
-      const { accessToken, refreshToken } = response.data;
-      localStorage.setItem("accessToken", accessToken);
-      document.cookie = `refreshToken=${refreshToken}; path=/; HttpOnly`;
+      const response = await apiService.signIn(data);
+      const { token } = response.data;
+      sessionStorage.setItem("token", token); // Save token to session storage
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -30,7 +34,33 @@ export const signIn = createAsyncThunk(
   }
 );
 
-// Email Verification
+export const refreshToken = createAsyncThunk(
+  "auth/refreshToken",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await apiService.refreshToken();
+      const { token } = response.data;
+      sessionStorage.setItem("token", token); // Update token in session storage
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const logout = createAsyncThunk(
+  "auth/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      await apiService.logout();
+      sessionStorage.removeItem("token"); // Remove token from session storage
+      return;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
 export const verifyEmail = createAsyncThunk(
   "auth/verifyEmail",
   async (token, { rejectWithValue }) => {
@@ -43,38 +73,14 @@ export const verifyEmail = createAsyncThunk(
   }
 );
 
-// Login Verification
 export const loginVerify = createAsyncThunk(
   "auth/loginVerify",
   async (token, { rejectWithValue }) => {
     try {
       const response = await apiService.loginVerify(token);
-      const { access, refresh } = response.data;
-
-      localStorage.setItem("accessToken", access);
-      console.log("Access token saved to localStorage:", access);
-
-      document.cookie = `refreshToken=${refresh}; path=/; HttpOnly; Secure; SameSite=Strict`;
-      console.log("Refresh token saved as cookie");
-
+      const { newToken } = response.data;
+      sessionStorage.setItem("token", newToken); // Update token in session storage
       return response.data;
-    } catch (error) {
-      console.error("Login verification error:", error);
-      return rejectWithValue(error.response?.data || error.message);
-    }
-  }
-);
-
-// Logout
-export const logout = createAsyncThunk(
-  "auth/logout",
-  async (_, { rejectWithValue }) => {
-    try {
-      //await apiService.logout();
-      localStorage.removeItem("accessToken");
-      document.cookie =
-        "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
-      alert("You have been logged out successfully.");
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -83,20 +89,10 @@ export const logout = createAsyncThunk(
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    user: null,
-    loading: false,
-    error: null,
-    accessToken: null,
-    refreshToken: null,
-    isUserLoggedIn: !!localStorage.getItem("accessToken"),
-  },
+  initialState,
   reducers: {
     clearError(state) {
       state.error = null;
-    },
-    setLoginStatus(state, action) {
-      state.isUserLoggedIn = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -105,7 +101,7 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(signUp.fulfilled, (state) => {
+      .addCase(signUp.fulfilled, (state, action) => {
         state.loading = false;
       })
       .addCase(signUp.rejected, (state, action) => {
@@ -117,16 +113,20 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(signIn.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.accessToken = action.payload.accessToken;
-        state.refreshToken = action.payload.refreshToken;
-        state.isUserLoggedIn = true;
         state.loading = false;
+        state.token = action.payload.token;
+        state.user = action.payload.user;
       })
       .addCase(signIn.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        state.isUserLoggedIn = true;
+      })
+      .addCase(refreshToken.fulfilled, (state, action) => {
+        state.token = action.payload.token;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.token = null;
+        state.user = null;
       })
       .addCase(verifyEmail.pending, (state) => {
         state.loading = true;
@@ -134,32 +134,16 @@ const authSlice = createSlice({
       })
       .addCase(verifyEmail.fulfilled, (state, action) => {
         state.loading = false;
-        alert("Email verified successfully!");
       })
       .addCase(verifyEmail.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        alert("Email verification failed.");
-      })
-      .addCase(loginVerify.pending, (state) => {
-        state.loading = true;
-        state.error = null;
       })
       .addCase(loginVerify.fulfilled, (state, action) => {
-        state.loading = false;
-        alert("Login verified successfully!", state.accessToken);
-      })
-      .addCase(loginVerify.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-        alert("Login verification failed.");
-      })
-      .addCase(logout.fulfilled, (state) => {
-        state.user = null;
-        state.isUserLoggedIn = false;
+        state.token = action.payload.newToken;
       });
   },
 });
 
-export const { clearError, setLoginStatus } = authSlice.actions;
+export const { clearError } = authSlice.actions;
 export default authSlice.reducer;
