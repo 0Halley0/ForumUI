@@ -172,7 +172,7 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-export default function TiptapEditor() {
+export default function TiptapEditor({ setContent }) {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -197,6 +197,9 @@ export default function TiptapEditor() {
       Highlight,
     ],
     content: "",
+    onUpdate: ({ editor }) => {
+      setContent(editor.getHTML());
+    },
   });
 
   return (

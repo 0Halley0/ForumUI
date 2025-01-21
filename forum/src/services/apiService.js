@@ -8,11 +8,12 @@ const apiClient = axios.create({
     "Content-Type": "application/json",
   },
 });
+
 apiClient.interceptors.request.use(
   (config) => {
-    const token = sessionStorage.getItem("token");
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+    const accessToken = sessionStorage.getItem("access");
+    if (accessToken) {
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
     console.log("Request Headers:", config.headers);
     return config;

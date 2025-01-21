@@ -4,6 +4,8 @@ import { apiService } from "../services/apiService";
 const initialState = {
   user: null,
   token: sessionStorage.getItem("token") || null,
+  access: sessionStorage.getItem("access") || null,
+  refresh: sessionStorage.getItem("refresh") || null,
   loading: false,
   error: null,
 };
@@ -26,7 +28,7 @@ export const signIn = createAsyncThunk(
     try {
       const response = await apiService.signIn(data);
       const { token } = response.data;
-      sessionStorage.setItem("token", token); // Save token to session storage
+      sessionStorage.setItem("token", token);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -39,8 +41,9 @@ export const refreshToken = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await apiService.refreshToken();
-      const { token } = response.data;
-      sessionStorage.setItem("token", token); // Update token in session storage
+      const { access, refresh } = response.data;
+      sessionStorage.setItem("access", access);
+      sessionStorage.setItem("refresh", refresh);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -53,7 +56,7 @@ export const logout = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await apiService.logout();
-      sessionStorage.removeItem("token"); // Remove token from session storage
+      sessionStorage.removeItem("token");
       return;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -78,9 +81,11 @@ export const loginVerify = createAsyncThunk(
   async (token, { rejectWithValue }) => {
     try {
       const response = await apiService.loginVerify(token);
-      const { newToken } = response.data;
-      sessionStorage.setItem("token", newToken); // Update token in session storage
-      return response.data;
+      const { access, refresh } = response.data;
+      sessionStorage.setItem("access", access);
+      sessionStorage.setItem("refresh", refresh);
+      console.log(access)
+      return { access, refresh };
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -122,7 +127,7 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(refreshToken.fulfilled, (state, action) => {
-        state.token = action.payload.token;
+        state.token = action.payload.access;
       })
       .addCase(logout.fulfilled, (state) => {
         state.token = null;
@@ -140,7 +145,9 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(loginVerify.fulfilled, (state, action) => {
-        state.token = action.payload.newToken;
+        state.token = action.payload.access;
+        state.access = action.payload.access;
+        state.refresh = action.payload.refresh;
       });
   },
 });

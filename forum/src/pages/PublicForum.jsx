@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Transition } from "react-transition-group";
 import RecommendedSection from "../components/RecommendedSection";
 import StoryCard from "../components/StoryCard";
+import { useDispatch } from "react-redux";
+import { loginVerify } from "../store/authSlice";
 
 const duration = 300;
 
@@ -18,6 +20,7 @@ const transitionStyles = {
 };
 
 export default function PublicForum() {
+  const dispatch = useDispatch();
   const [showRecommended, setShowRecommended] = useState(false);
 
   const toggleRecommended = () => {
@@ -141,8 +144,9 @@ export default function PublicForum() {
 
     if (tokenFromUrl) {
       sessionStorage.setItem("token", tokenFromUrl);
+      dispatch(loginVerify(tokenFromUrl));
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="flex flex-col md:flex-row bg-background dark:bg-dark-background">
