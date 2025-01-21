@@ -7,6 +7,7 @@ export default function StoryCard({
   comments,
   image,
 }) {
+  const sanitizedDescription = description.replace(/<img[^>]*>/g, "");
   return (
     <div className="bg-background dark:bg-dark-background grid grid-cols-1 lg:grid-cols-3 text-justify items-start p-4 lg:mx-24 border-b border-icon dark:border-dark-icon gap-4">
       <div className="w-80 h-52 md:w-96 col-span-1 lg:hidden flex-shrink-0 mx-auto">
@@ -26,9 +27,10 @@ export default function StoryCard({
           </button>
         </div>
 
-        <span className="text-text dark:text-dark-text col-span-1 line-clamp-3">
-          {description}
-        </span>
+        <div
+          className="story-content text-text dark:text-dark-text col-span-1 line-clamp-3"
+          dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+        />
         <div className="col-span-1 flex justify-between items-center text-sm text-text dark:text-dark-text mt-2">
           <div>
             {" "}

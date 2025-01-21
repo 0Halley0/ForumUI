@@ -27,10 +27,6 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-p {
-  margin: 1.5rem;
-}
-
 h1 {
   font-size: 72px;
   padding-left: 6rem;
@@ -255,4 +251,17 @@ h2 {
     background-size: 60%, 60%;
     background-position: -100% bottom, 200% top;
   }
+}
+
+.story-content p {
+  margin-bottom: 16px;
+}
+
+.story-content a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.story-content a:hover {
+  text-decoration: underline;
 }
