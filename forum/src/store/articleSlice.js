@@ -13,7 +13,6 @@ export const fetchArticles = createAsyncThunk(
   }
 );
 
-// Fetch article by ID
 export const fetchArticleById = createAsyncThunk(
   "articles/fetchArticleById",
   async (id, { rejectWithValue }) => {
@@ -26,7 +25,6 @@ export const fetchArticleById = createAsyncThunk(
   }
 );
 
-// Create article
 export const createArticle = createAsyncThunk(
   "articles/createArticle",
   async (data, { rejectWithValue }) => {
@@ -39,7 +37,6 @@ export const createArticle = createAsyncThunk(
   }
 );
 
-// Update article
 export const updateArticle = createAsyncThunk(
   "articles/updateArticle",
   async ({ id, data }, { rejectWithValue }) => {
@@ -52,7 +49,6 @@ export const updateArticle = createAsyncThunk(
   }
 );
 
-// Partially update article
 export const partiallyUpdateArticle = createAsyncThunk(
   "articles/partiallyUpdateArticle",
   async ({ id, data }, { rejectWithValue }) => {
@@ -65,7 +61,6 @@ export const partiallyUpdateArticle = createAsyncThunk(
   }
 );
 
-// Delete article
 export const deleteArticle = createAsyncThunk(
   "articles/deleteArticle",
   async (id, { rejectWithValue }) => {

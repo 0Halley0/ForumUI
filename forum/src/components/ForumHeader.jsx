@@ -126,50 +126,50 @@ export default function ForumHeader() {
           }`}
         >
           {/* Menu Links */}
-          <ul className="flex flex-col gap-4">
-            <li
+          <div className="flex flex-col  gap-4">
+            <div
               onClick={() => navigate("/forum")}
-              className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+              className="text-center text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
             >
               Forum
-            </li>
-            <li
+            </div>
+            <div
               onClick={() => navigate("/library")}
-              className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+              className="text-center text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
             >
               Library
-            </li>
-            <li
+            </div>
+            <div
               onClick={() => navigate("/stories")}
-              className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+              className="text-center text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
             >
               Story
-            </li>
-            <li
+            </div>
+            <div
               onClick={() => navigate("/draft")}
-              className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+              className="text-center text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
             >
               Write
-            </li>
-            <li
+            </div>
+            <div
               onClick={() => navigate("/profile")}
-              className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+              className="text-center text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
             >
               Profile
-            </li>
-            <li
+            </div>
+            <div
               onClick={() => navigate("/settings")}
-              className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+              className="text-center text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
             >
               Settings
-            </li>
-            <li
+            </div>
+            <div
               onClick={handleLogout}
-              className="text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
+              className="text-center text-text dark:text-dark-text hover:text-goldenRod dark:hover:text-gold transition duration-200"
             >
               Log Out
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       )}
     </div>

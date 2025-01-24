@@ -13,6 +13,7 @@ import PublicForum from "./pages/PublicForum";
 import UserStories from "./pages/UserStories";
 import Library from "./pages/Library";
 import Draft from "./pages/Draft";
+import Profile from "./pages/Profile";
 
 function Router() {
   return (
@@ -29,6 +30,7 @@ function Router() {
         <Route path="/stories" element={<UserStories />} />
         <Route path="/library" element={<Library />} />
         <Route path="/draft" element={<Draft />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

@@ -84,7 +84,6 @@ export const loginVerify = createAsyncThunk(
       const { access, refresh } = response.data;
       sessionStorage.setItem("access", access);
       sessionStorage.setItem("refresh", refresh);
-      console.log(access)
       return { access, refresh };
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
