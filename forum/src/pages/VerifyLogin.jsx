@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginVerify, signIn } from "../store/authSlice";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -8,27 +8,26 @@ export default function VerifyLogin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const hasVerified = useRef(false);
   const { loading, error } = useSelector((state) => state.auth);
   const [statusMessage, setStatusMessage] = useState("");
   const [email, setEmail] = useState(location.state?.email || "");
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const token = queryParams.get("token");
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenFromUrl = urlParams.get("token");
 
-    if (token && !hasVerified.current) {
-      hasVerified.current = true;
-      dispatch(loginVerify(token))
+    if (tokenFromUrl) {
+      sessionStorage.setItem("token", tokenFromUrl);
+      dispatch(loginVerify(tokenFromUrl))
         .unwrap()
         .then(() => {
-          setStatusMessage("Email verified successfully!");
+          navigate("/forum");
         })
-        .catch((err) => {
-          setStatusMessage("Email verification failed.");
-          console.error(err);
+        .catch((error) => {
+          console.error("Verification failed:", error);
         });
     }
-  }, [dispatch, location, navigate]);
+  }, [dispatch, navigate]);
+
   const handleResendEmail = () => {
     if (email) {
       dispatch(signIn({ email }))

@@ -46,26 +46,26 @@ h4 {
 
 @media (max-width: 425px) {
   p {
-  margin: 1rem;
-}
+    margin: 1rem;
+  }
 
-h1 {
-  font-size: 58px;
-  padding-left: 3rem;
-}
-h2 {
-  font-size: 24px;
-  padding-left: 3.5rem;
-}
+  h1 {
+    font-size: 58px;
+    padding-left: 3rem;
+  }
+  h2 {
+    font-size: 24px;
+    padding-left: 3.5rem;
+  }
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .scrollbar-hide {
-    -ms-overflow-style: none;  
-    scrollbar-width: none; 
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .light-background {
@@ -264,4 +264,30 @@ h2 {
 
 .story-content a:hover {
   text-decoration: underline;
+}
+
+@keyframes leftToRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes rightToLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-left-to-right {
+  animation: leftToRight 12s linear infinite;
+}
+
+.animate-right-to-left {
+  animation: rightToLeft 6s linear infinite;
 }

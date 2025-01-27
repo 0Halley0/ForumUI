@@ -14,6 +14,7 @@ import UserStories from "./pages/UserStories";
 import Library from "./pages/Library";
 import Draft from "./pages/Draft";
 import Profile from "./pages/Profile";
+import Loading from "./components/Loading";
 
 function Router() {
   return (
@@ -31,6 +32,7 @@ function Router() {
         <Route path="/library" element={<Library />} />
         <Route path="/draft" element={<Draft />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/load" element={<Loading />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

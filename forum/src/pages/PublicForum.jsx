@@ -41,13 +41,6 @@ export default function PublicForum() {
   }));
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tokenFromUrl = urlParams.get("token");
-
-    if (tokenFromUrl) {
-      sessionStorage.setItem("token", tokenFromUrl);
-      dispatch(loginVerify(tokenFromUrl));
-    }
     dispatch(fetchArticles());
   }, [dispatch]);
 
