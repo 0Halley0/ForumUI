@@ -58,9 +58,24 @@ export default function PublicForum() {
 
       <div className="flex-1">
         <div className="overflow-auto h-screen">
-          {stories.map((story, index) => (
-            <StoryCard key={index} {...story} />
-          ))}
+          {status === "loading" && (
+            <div className="flex justify-center items-center h-full">
+              <i className="fa-solid fa-scroll fa-flip text-8xl text-icon dark:text-dark-icon"></i>
+            </div>
+          )}
+          {status === "succeeded" &&
+            stories.length > 0 &&
+            stories.map((story, index) => <StoryCard key={index} {...story} />)}
+          {status === "succeeded" && stories.length === 0 && (
+            <p className="text-center text-text dark:text-dark-text mt-8">
+              No Articles
+            </p>
+          )}
+          {status === "failed" && (
+            <p className="text-center text-red-500 mt-8">
+              Failed to load articles. Please try again later.
+            </p>
+          )}
         </div>
       </div>
 

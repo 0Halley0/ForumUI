@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginVerify, signIn } from "../store/authSlice";
 import { useNavigate, useLocation } from "react-router-dom";
+import Loading from "../components/Loading";
 import "../main.css";
 
 export default function VerifyLogin() {
@@ -9,6 +10,7 @@ export default function VerifyLogin() {
   const navigate = useNavigate();
   const location = useLocation();
   const { loading, error } = useSelector((state) => state.auth);
+  const [isVerifying, setIsVerifying] = useState(true);
   const [statusMessage, setStatusMessage] = useState("");
   const [email, setEmail] = useState(location.state?.email || "");
   useEffect(() => {
@@ -20,11 +22,15 @@ export default function VerifyLogin() {
       dispatch(loginVerify(tokenFromUrl))
         .unwrap()
         .then(() => {
+          setIsVerifying(false);
           navigate("/forum");
         })
         .catch((error) => {
+          setIsVerifying(false);
           console.error("Verification failed:", error);
         });
+    } else {
+      setIsVerifying(false);
     }
   }, [dispatch, navigate]);
 
@@ -43,6 +49,9 @@ export default function VerifyLogin() {
         });
     }
   };
+  if (isVerifying) {
+    return <Loading />;
+  }
   return (
     <div className="h-screen flex justify-center items-center bg-background dark:bg-dark-background">
       <div className="border border-dashed border-text dark:border-dark-text p-8 mx-4 sm:p-12">
