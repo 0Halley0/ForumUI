@@ -28,17 +28,19 @@ export default function PublicForum() {
   const toggleRecommended = () => {
     setShowRecommended(!showRecommended);
   };
-  const stories = articles.map((article) => ({
-    title: article.title,
-    description: article.content,
-    date: new Date(article.created_at).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-    }),
-    comments: 42,
-    image:
-      "https://fastly.picsum.photos/id/21/3008/2008.jpg?hmac=T8DSVNvP-QldCew7WD4jj_S3mWwxZPqdF0CNPksSko4",
-  }));
+  const stories = articles
+    .map((article) => ({
+      title: article.title,
+      description: article.content,
+      date: new Date(article.created_at).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      }),
+      comments: 42,
+      image:
+        "https://fastly.picsum.photos/id/19/2500/1667.jpg?hmac=7epGozH4QjToGaBf_xb2HbFTXoV5o8n_cYzB7I4lt6g",
+    }))
+    .reverse();
 
   useEffect(() => {
     dispatch(fetchArticles());

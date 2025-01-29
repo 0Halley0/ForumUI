@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserInfo, partiallyUpdateUserInfo } from "../store/authSlice";
+import ProfilePlaceholder from "../assets/images/scroll.webp";
 
 export default function Profile() {
+  const dispatch = useDispatch();
+  const { user, loading } = useSelector((state) => state.auth);
+
+  const [editable, setEditable] = useState(false);
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    dispatch(fetchUserInfo());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      setUsername(user.username);
+    }
+  }, [user]);
+
+  const handleSave = () => {
+    dispatch(partiallyUpdateUserInfo({ username }));
+    setEditable(false);
+  };
+
   return (
     <div className="w-screen h-screen">
       <div className="top-background bg-background h-1/4 w-full pt-12">
-        <div className="w-36 h-36 md:w-40 md:h-40 flex-shrink-0 mx-auto">
+        <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 flex-shrink-0 mx-auto">
           <img
-            src="https://fastly.picsum.photos/id/50/4608/3072.jpg?hmac=E6WgCk6MBOyuRjW4bypT6y-tFXyWQfC_LjIBYPUspxE"
-            alt="Story thumbnail"
+            src={ProfilePlaceholder}
+            alt="Profile"
             className="w-full h-full border-double border-4 border-black object-cover rounded-full"
           />
         </div>
@@ -17,42 +41,85 @@ export default function Profile() {
           <div className="col-span-1 text-lg font-thin">
             <span>
               Username{" "}
-              <button className="text-text dark:text-dark-text ml-2 mb-1">
+              <button
+                className="text-text dark:text-dark-text ml-2 mb-1"
+                onClick={() => setEditable(true)}
+              >
                 <i className="fa-solid fa-pencil text-dark-text"></i>
               </button>
             </span>
-            <p className="font-thin text-4xl">0Halley0</p>
+            {editable ? (
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="text-center bg-transparent text-4xl border-b border-gold w-72 rounded-lg"
+              />
+            ) : (
+              <p className="font-thin text-4xl">
+                {loading ? "Loading..." : username || "Username not set"}
+              </p>
+            )}
           </div>
 
           <div className="col-span-1 text-lg font-thin">
-            <span>
-              Email{" "}
-              <button className="text-text dark:text-dark-text ml-2 mb-1">
-                <i className="fa-solid fa-pencil text-dark-text"></i>
-              </button>
-            </span>
-            <p className="font-thin text-4xl">hello@mail.com</p>
+            <span>Email</span>
+            <p className="font-thin text-4xl">
+              {loading ? "Loading..." : user?.email || "Email not provided"}
+            </p>
           </div>
+
+          {editable && (
+            <button
+              onClick={handleSave}
+              className="mt-4 mx-8 py-2 bg-gold text-black rounded-lg"
+            >
+              Save
+            </button>
+          )}
         </div>
+
         <div className="hidden md:block text-dark-text absolute inset-x-1/3 inset-y-0 border-l border-gold lg:ml-8 pt-12 pl-4 w-1/3">
-          <div className="grid grid-cols-2 justify-items-start ">
+          <div className="grid grid-cols-2 justify-items-start">
             <span className="col-span-1 text-lg font-thin">
               Username{" "}
-              <button className="text-text dark:text-dark-text ml-2 mb-1">
+              <button
+                className="text-text dark:text-dark-text ml-2 mb-1"
+                onClick={() => setEditable(true)}
+              >
                 <i className="fa-solid fa-pencil text-dark-text"></i>
               </button>
             </span>
-            <span className="col-span-1 font-thin text-2xl">0Halley0</span>
+            <span className="col-span-1 font-thin text-2xl">
+              {editable ? (
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="bg-transparent rounded-lg text-2xl border-b border-gold"
+                />
+              ) : loading ? (
+                "Loading..."
+              ) : (
+                username || "Username not set"
+              )}
+            </span>
           </div>
           <div className="grid grid-cols-2 justify-items-start pt-4">
-            <span className="col-span-1 text-lg font-thin">
-              Email{" "}
-              <button className="text-text dark:text-dark-text ml-2 mb-1">
-                <i className="fa-solid fa-pencil text-dark-text"></i>
-              </button>
+            <span className="col-span-1 text-lg font-thin">Email</span>
+            <span className="col-span-1 font-thin text-2xl">
+              {loading ? "Loading..." : user?.email || "Email not provided"}
             </span>
-            <span className="col-span-1 font-thin text-2xl">hale@mail.com</span>
           </div>
+
+          {editable && (
+            <button
+              onClick={handleSave}
+              className="mt-4 px-4 py-2 bg-gold text-black rounded-lg"
+            >
+              Save
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -29,6 +29,9 @@ const endpoints = {
   LOGOUT: "/auth/logout",
   VERIFY_EMAIL: "/api/users/verify-email/",
   LOGIN_VERIFY: "/api/users/login-verify/",
+  GET_INFO: "/api/users/info/",
+  PUT_INFO: "/api/users/info/",
+  PATCH_INFO: "/api/users/info/",
   GET_ARTICLES: "/api/article/articles/",
   GET_ARTICLE_BY_ID: "/api/article/articles/{id}/",
   POST_ARTICLE: "/api/article/articles/",
@@ -44,6 +47,10 @@ const apiService = {
   logout: () => apiClient.post(endpoints.LOGOUT),
   verifyEmail: (token) => apiClient.post(endpoints.VERIFY_EMAIL, { token }),
   loginVerify: (token) => apiClient.post(endpoints.LOGIN_VERIFY, { token }),
+  getUserInfo: () => apiClient.get(endpoints.GET_INFO),
+  updateUserInfo: (data) => apiClient.put(endpoints.PUT_INFO, data),
+  partiallyUpdateUserInfo: (data) =>
+    apiClient.patch(endpoints.PATCH_INFO, data),
   getArticles: () => apiClient.get(endpoints.GET_ARTICLES),
   getArticleById: (id) =>
     apiClient.get(endpoints.GET_ARTICLE_BY_ID.replace("{id}", id)),
