@@ -9,6 +9,7 @@ export default function Profile() {
 
   const [editable, setEditable] = useState(false);
   const [username, setUsername] = useState("");
+  const [showOverlay, setShowOverlay] = useState(false);
 
   useEffect(() => {
     dispatch(fetchUserInfo());
@@ -20,6 +21,27 @@ export default function Profile() {
     }
   }, [user]);
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("avatar", file);
+      dispatch(partiallyUpdateUserInfo(formData))
+        .unwrap()
+        .then(() => {
+          console.log("Upload successful!");
+          dispatch(fetchUserInfo());
+        })
+        .catch((error) => {
+          console.error("Upload failed:", error);
+        });
+    } else {
+      console.error("No file selected");
+    }
+  };
+
+
   const handleSave = () => {
     dispatch(partiallyUpdateUserInfo({ username }));
     setEditable(false);
@@ -28,12 +50,28 @@ export default function Profile() {
   return (
     <div className="w-screen h-screen">
       <div className="top-background bg-background h-1/4 w-full pt-12">
-        <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 flex-shrink-0 mx-auto">
+        <div
+          className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 flex-shrink-0 mx-auto"
+          onMouseEnter={() => setShowOverlay(true)}
+          onMouseLeave={() => setShowOverlay(false)}
+        >
           <img
-            src={ProfilePlaceholder}
+            src={user?.avatar_url || ProfilePlaceholder}
             alt="Profile"
             className="w-full h-full border-double border-4 border-black object-cover rounded-full"
           />
+          {showOverlay && (
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full">
+              <label className="text-white cursor-pointer">
+                <i className="fa-solid fa-pencil text-dark-text"></i>
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+              </label>
+            </div>
+          )}
         </div>
       </div>
       <div className="bottom-background bg-dark-background h-3/4 relative w-full">
