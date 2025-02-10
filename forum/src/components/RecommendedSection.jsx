@@ -65,7 +65,7 @@ export default function RecommendedSection() {
   };
 
   return (
-    <div className="h-screen text-dark-text recommend-section-background bg-dark-background border-l border-icon dark:border-dark-icon p-4">
+    <div className="h-full flex flex-col text-dark-text recommend-section-background bg-dark-background border-l border-icon dark:border-dark-icon p-4">
       <div className="flex justify-between mt-16 gap-2">
         <div className="relative w-full">
           <input

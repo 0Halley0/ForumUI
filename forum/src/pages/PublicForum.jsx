@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Transition } from "react-transition-group";
 import RecommendedSection from "../components/RecommendedSection";
 import StoryCard from "../components/StoryCard";
@@ -25,6 +25,7 @@ export default function PublicForum() {
   const { articles, status, error } = useSelector((state) => state.articles);
   const [showRecommended, setShowRecommended] = useState(false);
   const { categories } = useSelector((state) => state.articles);
+  const categoryRef = useRef(null);
 
   const toggleRecommended = () => {
     setShowRecommended(!showRecommended);
@@ -47,6 +48,15 @@ export default function PublicForum() {
     dispatch(fetchCategories());
   }, [dispatch]);
 
+  const handleScroll = (direction) => {
+    if (categoryRef.current) {
+      categoryRef.current.scrollBy({
+        left: direction === "left" ? -200 : 200,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className="flex flex-col md:flex-row bg-background dark:bg-dark-background">
       <div className="flex justify-end">
@@ -60,19 +70,32 @@ export default function PublicForum() {
       </div>
 
       <div className="flex-1">
-        <div className="flex gap-4 m-4 justify-between">
-          <i className="fa-solid fa-chevron-left text-lg text-text dark:text-dark-icon "></i>
-          <div className="flex gap-2 ">
+        <div className="flex gap-2 m-4 justify-between items-center">
+          <button
+            className="flex-none size-14"
+            onClick={() => handleScroll("left")}
+          >
+            <i className="fa-solid fa-chevron-left text-lg text-text dark:text-dark-icon"></i>
+          </button>
+          <div
+            className="flex overflow-x-auto border-b border-text dark:border-dark-text scrollbar-hide grow size-14 whitespace-nowrap px-2"
+            ref={categoryRef}
+          >
             {categories.map((category) => (
               <span
                 key={category.id}
-                className="px-3 py-1 border-double border-4 border-black bg-signinPopupBg text-text rounded-full text-sm overflow-x-auto whitespace-nowrap"
+                className="px-4 text-text dark:text-dark-text rounded-full text-md font-normal flex items-center justify-center hover:text-black hover:font-medium dark:hover:text-gold"
               >
                 {category.name}
               </span>
             ))}
           </div>
-          <i className="fa-solid fa-chevron-right text-lg text-text dark:text-dark-icon"></i>
+          <button
+            className="flex-none size-14"
+            onClick={() => handleScroll("right")}
+          >
+            <i className="fa-solid fa-chevron-right text-lg text-text dark:text-dark-icon"></i>
+          </button>
         </div>
         <div className="overflow-auto h-screen">
           {status === "loading" && (
