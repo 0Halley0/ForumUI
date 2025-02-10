@@ -5,14 +5,14 @@ export default function StoryCard({
   description,
   date,
   comments,
-  image,
+  photo_url,
 }) {
   const sanitizedDescription = description.replace(/<img[^>]*>/g, "");
   return (
     <div className="bg-background dark:bg-dark-background grid grid-cols-1 lg:grid-cols-3 text-justify items-start p-4 lg:mx-24 border-b border-icon dark:border-dark-icon gap-4">
       <div className="w-80 h-52 md:w-96 col-span-1 lg:hidden flex-shrink-0 mx-auto">
         <img
-          src={image}
+          src={photo_url}
           alt="Story thumbnail"
           className="w-full h-full object-cover rounded"
         />
@@ -53,7 +53,7 @@ export default function StoryCard({
       </div>
       <div className="hidden w-52 h-40 xl:w-72 col-span-1 lg:block flex-shrink-0 mx-auto">
         <img
-          src={image}
+          src={photo_url}
           alt="Story thumbnail"
           className="w-full h-full object-cover rounded"
         />

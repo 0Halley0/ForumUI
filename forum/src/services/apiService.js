@@ -38,6 +38,7 @@ const endpoints = {
   PUT_ARTICLE: "/api/article/articles/{id}/",
   PATCH_ARTICLE: "/api/article/articles/{id}/",
   DELETE_ARTICLE: "/api/article/articles/{id}/",
+  GET_CATEGORIES: "/api/category/all/",
 };
 
 const apiService = {
@@ -61,6 +62,7 @@ const apiService = {
     apiClient.patch(endpoints.PATCH_ARTICLE.replace("{id}", id), data),
   deleteArticle: (id) =>
     apiClient.delete(endpoints.DELETE_ARTICLE.replace("{id}", id)),
+  getCategories: () => apiClient.get(endpoints.GET_CATEGORIES),
 };
 
 export { apiService, endpoints };

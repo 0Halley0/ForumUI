@@ -3,8 +3,8 @@ import { Transition } from "react-transition-group";
 import RecommendedSection from "../components/RecommendedSection";
 import StoryCard from "../components/StoryCard";
 import { useDispatch, useSelector } from "react-redux";
-import { loginVerify } from "../store/authSlice";
-import { fetchArticles } from "../store/articleSlice";
+import { fetchArticles, fetchCategories } from "../store/articleSlice";
+import ProfilePlaceholder from "../assets/images/scroll.webp";
 
 const duration = 300;
 
@@ -24,6 +24,7 @@ export default function PublicForum() {
   const dispatch = useDispatch();
   const { articles, status, error } = useSelector((state) => state.articles);
   const [showRecommended, setShowRecommended] = useState(false);
+  const { categories } = useSelector((state) => state.articles);
 
   const toggleRecommended = () => {
     setShowRecommended(!showRecommended);
@@ -37,13 +38,13 @@ export default function PublicForum() {
         day: "numeric",
       }),
       comments: 42,
-      image:
-        "https://fastly.picsum.photos/id/19/2500/1667.jpg?hmac=7epGozH4QjToGaBf_xb2HbFTXoV5o8n_cYzB7I4lt6g",
+      photo_url: article.photo_url || ProfilePlaceholder,
     }))
     .reverse();
 
   useEffect(() => {
     dispatch(fetchArticles());
+    dispatch(fetchCategories());
   }, [dispatch]);
 
   return (
@@ -59,6 +60,20 @@ export default function PublicForum() {
       </div>
 
       <div className="flex-1">
+        <div className="flex gap-4 m-4 justify-between">
+          <i className="fa-solid fa-chevron-left text-lg text-text dark:text-dark-icon "></i>
+          <div className="flex gap-2 ">
+            {categories.map((category) => (
+              <span
+                key={category.id}
+                className="px-3 py-1 border-double border-4 border-black bg-signinPopupBg text-text rounded-full text-sm overflow-x-auto whitespace-nowrap"
+              >
+                {category.name}
+              </span>
+            ))}
+          </div>
+          <i className="fa-solid fa-chevron-right text-lg text-text dark:text-dark-icon"></i>
+        </div>
         <div className="overflow-auto h-screen">
           {status === "loading" && (
             <div className="flex justify-center items-center h-full">

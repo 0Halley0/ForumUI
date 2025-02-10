@@ -73,9 +73,22 @@ export const deleteArticle = createAsyncThunk(
   }
 );
 
+export const fetchCategories = createAsyncThunk(
+  "articles/fetchCategories",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await apiService.getCategories();
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
 const initialState = {
   articles: [],
   currentArticle: null,
+  categories: [],
   status: "idle",
   error: null,
 };
@@ -165,6 +178,17 @@ const articleSlice = createSlice({
         );
       })
       .addCase(deleteArticle.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(fetchCategories.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchCategories.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.categories = action.payload;
+      })
+      .addCase(fetchCategories.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });

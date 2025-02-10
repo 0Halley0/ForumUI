@@ -1,11 +1,11 @@
 export interface Article {
   id: number;
-  tags: number[];
-  category: number;
-  creator: string;
   title: string;
   content: string;
+  photo?: string;
+  photo_url?: string;
   created_at: string;
   updated_at: string;
-  slug: string;
+  author: number;
+  clap?: number;
 }
