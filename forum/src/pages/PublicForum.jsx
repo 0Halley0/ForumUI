@@ -5,6 +5,7 @@ import StoryCard from "../components/StoryCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArticles, fetchCategories } from "../store/articleSlice";
 import ProfilePlaceholder from "../assets/images/scroll.webp";
+import { Link } from "react-router-dom";
 
 const duration = 300;
 
@@ -40,8 +41,7 @@ export default function PublicForum() {
       }),
       comments: 42,
       photo_url: article.photo_url || ProfilePlaceholder,
-    }))
-    .reverse();
+    }));
 
   useEffect(() => {
     dispatch(fetchArticles());
@@ -105,7 +105,15 @@ export default function PublicForum() {
           )}
           {status === "succeeded" &&
             stories.length > 0 &&
-            stories.map((story, index) => <StoryCard key={index} {...story} />)}
+            stories.map((story, index) => (
+              <Link
+                key={index}
+                to={`/article/${articles[index].id}`}
+                className="block"
+              >
+                <StoryCard {...story} />
+              </Link>
+            ))}
           {status === "succeeded" && stories.length === 0 && (
             <p className="text-center text-text dark:text-dark-text mt-8">
               No Articles

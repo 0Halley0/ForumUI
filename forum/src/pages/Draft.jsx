@@ -46,12 +46,17 @@ export default function Draft() {
           onClick={handleSave}
           className="text-text dark:text-dark-text mb-4"
         >
-          <span className="text-2xl text-text dark:text-dark-text pr-2">Save</span>
+          <span className="text-2xl text-text dark:text-dark-text pr-2">
+            Save
+          </span>
           <i className="text-2xl fa-solid fa-floppy-disk text-text dark:text-dark-text"></i>
         </button>
       </div>
+      <h2 className="font-thin text-text dark:text-dark-text mt-8">
+        Thumbnail
+      </h2>
       <div
-        className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 flex-shrink-0 lg:mx-28 mx-6 mt-8"
+        className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 flex-shrink-0 lg:mx-28 mx-6 "
         onMouseEnter={() => setShowOverlay(true)}
         onMouseLeave={() => setShowOverlay(false)}
       >
@@ -77,9 +82,6 @@ export default function Draft() {
 
       <div className="flex items-end gap-2 mt-8">
         <h2 className="font-thin text-text dark:text-dark-text">Title</h2>
-        <button className="text-text dark:text-dark-text mb-1">
-          <i className="fa-solid fa-pen-fancy text-text dark:text-dark-text"></i>
-        </button>
       </div>
       <div className="lg:mx-28 mx-6">
         <input
@@ -92,9 +94,6 @@ export default function Draft() {
       </div>
       <div className="flex items-end gap-2 mt-8">
         <h2 className="font-thin text-text dark:text-dark-text">Article</h2>
-        <button className="text-text dark:text-dark-text mb-1">
-          <i className="fa-solid fa-pen-fancy text-text dark:text-dark-text"></i>
-        </button>
       </div>
       <div>
         <TiptapEditor setContent={setContent} />
