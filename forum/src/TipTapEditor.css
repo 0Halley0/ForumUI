@@ -84,3 +84,7 @@ hr {
   border-top: 1px solid #d3d6db;
   margin: 2rem 0;
 }
+
+link {
+  color: deepskyblue !important;
+}

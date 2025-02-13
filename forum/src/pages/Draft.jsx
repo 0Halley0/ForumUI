@@ -39,7 +39,7 @@ export default function Draft() {
     }
   };
   return (
-    <div className="bg-background dark:bg-dark-background h-screen overflow-auto">
+    <div className="bg-background dark:bg-dark-background h-screen w-screen overflow-auto">
       <div className="flex items-end gap-8">
         <h1 className="font-thin text-text dark:text-dark-text">Draft</h1>
         <button
@@ -56,7 +56,7 @@ export default function Draft() {
         Thumbnail
       </h2>
       <div
-        className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 flex-shrink-0 lg:mx-28 mx-6 "
+        className="relative max-w-full lg:w-2/5 lg:h-64 xl:w-1/4 h-64 sm:h-96 mx-6 lg:mx-28"
         onMouseEnter={() => setShowOverlay(true)}
         onMouseLeave={() => setShowOverlay(false)}
       >
@@ -95,7 +95,7 @@ export default function Draft() {
       <div className="flex items-end gap-2 mt-8">
         <h2 className="font-thin text-text dark:text-dark-text">Article</h2>
       </div>
-      <div>
+      <div className="mb-8">
         <TiptapEditor setContent={setContent} />
       </div>
     </div>
