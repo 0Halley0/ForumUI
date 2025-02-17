@@ -39,6 +39,10 @@ const endpoints = {
   PATCH_ARTICLE: "/api/article/articles/{id}/",
   DELETE_ARTICLE: "/api/article/articles/{id}/",
   GET_CATEGORIES: "/api/category/all/",
+  POST_CLAP: "/api/article/clap/{article_id}/",
+  GET_TOP_PICKS: "/api/article/top-picks/",
+  GET_COMMENTS: "/api/comments/get/{slug}/",
+  POST_COMMENT: "/api/comments/create/",
 };
 
 const apiService = {
@@ -63,6 +67,12 @@ const apiService = {
   deleteArticle: (id) =>
     apiClient.delete(endpoints.DELETE_ARTICLE.replace("{id}", id)),
   getCategories: () => apiClient.get(endpoints.GET_CATEGORIES),
+  postClap: (articleId) =>
+    apiClient.post(endpoints.POST_CLAP.replace("{article_id}", articleId)),
+  getTopPicks: () => apiClient.get(endpoints.GET_TOP_PICKS),
+  getComments: (slug) =>
+    apiClient.get(endpoints.GET_COMMENTS.replace("{slug}", slug)),
+  postComment: (data) => apiClient.post(endpoints.POST_COMMENT, data),
 };
 
 export { apiService, endpoints };

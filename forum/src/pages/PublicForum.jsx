@@ -23,7 +23,7 @@ const transitionStyles = {
 
 export default function PublicForum() {
   const dispatch = useDispatch();
-  const { articles, status, error } = useSelector((state) => state.articles);
+  const { articles, status } = useSelector((state) => state.articles);
   const [showRecommended, setShowRecommended] = useState(false);
   const { categories } = useSelector((state) => state.articles);
   const categoryRef = useRef(null);
@@ -31,17 +31,17 @@ export default function PublicForum() {
   const toggleRecommended = () => {
     setShowRecommended(!showRecommended);
   };
-  const stories = articles
-    .map((article) => ({
-      title: article.title,
-      description: article.content,
-      date: new Date(article.created_at).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-      }),
-      comments: 42,
-      photo_url: article.photo_url || ProfilePlaceholder,
-    }));
+  const stories = articles.map((article) => ({
+    title: article.title,
+    description: article.content,
+    date: new Date(article.created_at).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }),
+    comments: 42,
+    photo_url: article.photo_url || ProfilePlaceholder,
+  }));
 
   useEffect(() => {
     dispatch(fetchArticles());

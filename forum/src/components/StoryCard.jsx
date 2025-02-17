@@ -15,6 +15,11 @@ export default function StoryCard({
     .replace(/<\/?code>/g, " ")
     .replace(/<\/?pre>/g, " ")
     .replace(/<\/?li>/g, " ")
+    .replace(/<\/?ol>/g, " ")
+    .replace(/<\/?ul>/g, " ")
+    .replace(/<\/?h1>/g, " ")
+    .replace(/<\/?h2>/g, " ")
+    .replace(/<\/?h3>/g, " ")
     .replace(/<\/?br>/g, " ");
   return (
     <div className="bg-background dark:bg-dark-background grid grid-cols-1 lg:grid-cols-3 text-justify items-start p-4 lg:mx-24 border-b border-icon dark:border-dark-icon gap-4">
